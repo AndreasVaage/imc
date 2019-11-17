@@ -10845,65 +10845,90 @@
       </description>
    </field>
   </message>
-  
-  <message id="1013" name="Raw Current Profile" abbrev="RawCurrentProfile" source="vehicle" flags="periodic">
-    <description>
-      List of vectors quantifying the direction and magnitude of current velocities at different
-      distances from the vehicle relative to a given coordinate frame. Standard data format defined by the 
-      National Marine Electronics Association
-    </description>
-    <field name="Config" abbrev="config" unit="Bitfield" type="uint8_t" prefix="conf">
-      <description>
-        Describes the configuration of the message. 
-      </description>
-      <value id="0x01" abbrev="tbd" name="tbd"/>
-      <value id="0x02" abbrev="tbd1" name="tbd1"/>
-      <value id="0x04" abbrev="tbd2" name="tbd2"/>
-      <value id="0x08" abbrev="tbd3" name="tbd3"/>
-    </field>
-    <field name="Distances" abbrev="distances" type="message-list" message-type="Depth">
-      <description>
-        Distance of each measurment cell along the Z-axis in the sensor frame.
-      </description>
-    </field>
-    <field name="Velocities" abbrev="velocities" type="message-list" message-type="CurrentVelocity">
-      <description>
-        List of Velocites: Each field corresponds to the velocity at the position given by the corresponding index in the Distances list.
-      </description>
-    </field>
-    <field name="Amplitudes" abbrev="amplitudes" type="message-list" message-type="AcousticBackscatter">
-      <description>
-        List of Amplitudes: Each field corresponds to the amplitude at the position given by the corresponding index in the Distances list.
-      </description>
-    </field>
-    <field name="Correlations" abbrev="correlations" type="message-list" message-type="Correlation">
-      <description>
-        List of Correlations: Each field corresponds to the correlation at the position given by the corresponding index in the Distances list.
-      </description>
-    </field>
-  </message>
-  
+
   <message id="1014" name="Current Profile Cell" abbrev="CurrentProfileCell" source="vehicle" flags="periodic">
-      <description>
-        List of vectors quantifying the direction and magnitude of current velocities at different
-        distances from the vehicle relative to a given coordinate frame. Standard data format defined by the
-        National Marine Electronics Association
-      </description>
+    <description>
+      Raw Current measurement at CellPosition along the Z-axis in the ADCP sensor frame.
+    </description>
     <field name="Cell Position" abbrev="CellPosition" type="fp32_t" unit="m">
       <description>
         Distance of each measurment cell along the Z-axis in the sensor frame.
       </description>
     </field>
-    <field name="Velocity" abbrev="velocity" type="message" message-type="CurrentVelocity"></field>
-    <field name="Amplitude" abbrev="amplitude" type="message" message-type="AcousticBackscatter"></field>
-    <field name="Correlation" abbrev="correlation" type="message" message-type="Correlation"></field>
+    <field name="Vel X" abbrev="x" type="fp32_t" unit="m/s">
+      <description>
+        X velocity component
+      </description>
+    </field>
+    <field name="Vel Y" abbrev="y" type="fp32_t" unit="m/s">
+      <description>
+        Y velocity component
+      </description>
+    </field>
+    <field name="Vel Z1" abbrev="z1" type="fp32_t" unit="m/s">
+      <description>
+        Z1 velocity component
+      </description>
+    </field>
+    <field name="Vel Z2" abbrev="z2" type="fp32_t" unit="m/s">
+      <description>
+        Z2 velocity component
+      </description>
+    </field>
+
+    <field name="Amp 0" abbrev="amp0" type="fp32_t" unit="dB">
+      <description>
+        Amplitude of returning ping for beam 0
+      </description>
+    </field>
+    <field name="Amp 1" abbrev="amp1" type="fp32_t" unit="dB">
+      <description>
+        Amplitude of returning ping for beam 1
+      </description>
+    </field>
+    <field name="Amp 2" abbrev="amp2" type="fp32_t" unit="dB">
+      <description>
+        Amplitude of returning ping for beam 2
+      </description>
+    </field>
+    <field name="Amp 3" abbrev="amp3" type="fp32_t" unit="dB">
+      <description>
+        Amplitude of returning ping for beam 3
+      </description>
+    </field>
+
+    <field name="Cor 0" abbrev="cor0" type="uint8_t" unit="%" max="100" min="0">
+      <description>
+        Correlation of a given beam measurement relative to the other beam measurements.
+      </description>
+    </field>
+    <field name="Cor 1" abbrev="cor1" type="uint8_t" unit="%" max="100" min="0">
+      <description>
+        Correlation of a given beam measurement relative to the other beam measurements.
+      </description>
+    </field>
+    <field name="Cor 2" abbrev="cor2" type="uint8_t" unit="%" max="100" min="0">
+      <description>
+        Correlation of a given beam measurement relative to the other beam measurements.
+      </description>
+    </field>
+    <field name="Cor 3" abbrev="cor3" type="uint8_t" unit="%" max="100" min="0">
+      <description>
+        Correlation of a given beam measurement relative to the other beam measurements.
+      </description>
+    </field>
   </message>
-  
+
   <message id="1015" name="Current Profile" abbrev="CurrentProfile" source="vehicle" flags="periodic">
     <description>
-      Current profile: list of current profile measurment cells.
+      Raw Current Profile along the Z-axis of the sensor frame. Contains velocity of water
+      relative to the vehicle velocity represented in the sensor coordinate frame.
     </description>
-    <field name="Current Profile" abbrev="CurrentProfile" type="message-list" message-type="CurrentProfileCell"></field>
-  </message> 
+    <field name="Current Profile" abbrev="CurrentProfile" type="message-list" message-type="CurrentProfileCell">
+      <description>
+        List of current profile measurement cells.
+      </description>
+    </field>
+  </message>
   
 </messages>
